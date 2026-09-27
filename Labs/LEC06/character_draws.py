@@ -9,8 +9,13 @@ def draw(x, y):
     delay(0.01)
 
 
+def move_circle():
+    draw(600, 300)
+
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
-draw(400, 300)
+move_circle()
 delay(1)
 close_canvas()
