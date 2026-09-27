@@ -14,8 +14,14 @@ def move_circle():
 
 
 
+def move_square():
+    draw(50, 550)
+
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
 move_circle()
+move_square()
 delay(1)
 close_canvas()
