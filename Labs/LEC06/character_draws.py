@@ -19,9 +19,15 @@ def move_square():
 
 
 
+def move_triangle():
+    draw(100, 100)
+
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
 move_circle()
 move_square()
+move_triangle()
 delay(1)
 close_canvas()
