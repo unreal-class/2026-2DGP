@@ -2,10 +2,14 @@
 from pico2d import *
 
 
+def draw(x, y):
+    clear_canvas()
+    boy.draw(x, y)
+    update_canvas()
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
-clear_canvas()
-boy.draw(400, 300)
-update_canvas()
+draw(400, 300)
 delay(1)
 close_canvas()
