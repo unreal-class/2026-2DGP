@@ -2,6 +2,9 @@
 import math
 from pico2d import *
 
+# 숫자가 작을수록 빠르게 움직인다.
+delay_time = 0.02
+
 def draw_circle():
     for degree in range(0, 360, 5):
         theta = math.radians(degree)
@@ -26,7 +29,7 @@ def draw_character(x, y):
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
-    delay(0.05)
+    delay(delay_time)
 
 def move_right():
     print('right')
