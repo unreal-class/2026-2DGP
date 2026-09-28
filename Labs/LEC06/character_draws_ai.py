@@ -28,7 +28,7 @@ def polygon(boy, points):
 
 
 def circle(boy):
-    for degree in range(0, 91, 5):
+    for degree in range(0, 181, 5):
         angle = math.radians(degree)
         x = 400 + 200 * math.cos(angle)
         y = 300 + 200 * math.sin(angle)
