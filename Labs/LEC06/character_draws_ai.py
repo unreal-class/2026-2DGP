@@ -11,7 +11,6 @@ def draw(boy, x, y):
     start_time = perf_counter()
     for event in get_events():
         if event.type == SDL_QUIT or (event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE):
-            close_canvas()
             raise SystemExit
     clear_canvas()
     boy.draw(x, y)
@@ -54,12 +53,14 @@ def circle():
 
 
 open_canvas(800, 600)
-boy = load_image(str(Path(__file__).with_name('character.png')))
-square = [(50, 50), (50, 550), (750, 550), (750, 50)]
-triangle = [(100, 100), (700, 100), (400, 500)]
-paths = (circle(), polygon(square), polygon(triangle))
-while True:
-    for points in paths:
-        for x, y in points:
-            draw(boy, x, y)
-close_canvas()
+try:
+    boy = load_image(str(Path(__file__).with_name('character.png')))
+    square = [(50, 50), (50, 550), (750, 550), (750, 50)]
+    triangle = [(100, 100), (700, 100), (400, 500)]
+    paths = (circle(), polygon(square), polygon(triangle))
+    while True:
+        for points in paths:
+            for x, y in points:
+                draw(boy, x, y)
+finally:
+    close_canvas()
