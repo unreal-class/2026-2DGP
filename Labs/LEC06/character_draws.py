@@ -44,7 +44,8 @@ def draw_rectangle():
     move_left()
 
 def draw_triangle():
-    draw_character(100, 100)
+    for x in range(100, 701, 50):
+        draw_character(x, 100)
 
 open_canvas(800, 600)
 boy = load_image('character.png')
