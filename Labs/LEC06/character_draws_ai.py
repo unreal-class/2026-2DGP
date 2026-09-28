@@ -10,6 +10,9 @@ def draw(boy, x, y):
 
 
 def line(boy, start, end):
+    if start == end:
+        draw(boy, *start)
+        return
     x1, y1 = start
     x2, y2 = end
     count = max(1, math.ceil(math.hypot(x2 - x1, y2 - y1) / 10))
