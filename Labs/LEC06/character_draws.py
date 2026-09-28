@@ -11,7 +11,7 @@ def draw_circle():
 
 def move_top():
     print('top')
-    for y in range(50, 551, 50):
+    for y in range(50, 551, 10):
         draw_character(50, y)
     
 
@@ -23,17 +23,17 @@ def draw_character(x, y):
 
 def move_right():
     print('right')
-    for x in range(50, 751, 50):
+    for x in range(50, 751, 10):
            draw_character(x, 550)
 
 def move_bottom():
     print('bottom')
-    for y in range(550, 49, -50):
+    for y in range(550, 49, -10):
         draw_character(750, y)
 
 def move_left():
     print('left')
-    for x in range(750, 49, -50):
+    for x in range(750, 49, -10):
         draw_character(x, 50)
 
 
