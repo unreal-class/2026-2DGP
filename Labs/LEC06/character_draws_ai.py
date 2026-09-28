@@ -27,8 +27,17 @@ def polygon(boy, points):
         line(boy, start, end)
 
 
+def circle(boy):
+    for degree in range(0, 91, 5):
+        angle = math.radians(degree)
+        x = 400 + 200 * math.cos(angle)
+        y = 300 + 200 * math.sin(angle)
+        draw(boy, x, y)
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
+circle(boy)
 polygon(boy, [(50, 50), (50, 550), (750, 550), (750, 50)])
 polygon(boy, [(100, 100), (700, 100), (400, 500)])
 close_canvas()
