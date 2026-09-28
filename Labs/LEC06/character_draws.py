@@ -1,5 +1,6 @@
 # 실습 과제 진행 - AI 도움을 받아 단계별로 작성
 import math
+from pathlib import Path
 from pico2d import *
 
 # 숫자가 작을수록 빠르게 움직인다.
@@ -78,7 +79,7 @@ def draw_triangle():
     triangle_down()
 
 open_canvas(800, 600)
-boy = load_image('character.png')
+boy = load_image(str(Path(__file__).with_name('character.png')))
 while True:
     draw_circle()
     draw_rectangle()
