@@ -52,15 +52,20 @@ def circle():
     return points
 
 
-open_canvas(800, 600)
-try:
-    boy = load_image(str(Path(__file__).with_name('character.png')))
-    square = [(50, 50), (50, 550), (750, 550), (750, 50)]
-    triangle = [(100, 100), (700, 100), (400, 500)]
-    paths = (circle(), polygon(square), polygon(triangle))
-    while True:
-        for points in paths:
-            for x, y in points:
-                draw(boy, x, y)
-finally:
-    close_canvas()
+def main():
+    open_canvas(800, 600)
+    try:
+        boy = load_image(str(Path(__file__).with_name('character.png')))
+        square = [(50, 50), (50, 550), (750, 550), (750, 50)]
+        triangle = [(100, 100), (700, 100), (400, 500)]
+        paths = (circle(), polygon(square), polygon(triangle))
+        while True:
+            for points in paths:
+                for x, y in points:
+                    draw(boy, x, y)
+    finally:
+        close_canvas()
+
+
+if __name__ == '__main__':
+    main()
