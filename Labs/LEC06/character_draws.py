@@ -2,27 +2,23 @@
 import math
 from pico2d import *
 
-
-def draw(x, y):
-    clear_canvas()
-    boy.draw(x, y)
-    update_canvas()
-    delay(0.01)
-
-
-def move_circle():
-    # 화면 가운데를 중심으로 반지름 200인 원을 한 바퀴 돈다.
-    for angle in range(361):
-        rad = math.radians(angle)
-        x = 400 + 200 * math.cos(rad)
-        y = 300 + 200 * math.sin(rad)
-        draw(x, y)
-
-
+def draw_circle():
+    for degree in range(0, 360, 5):
+        theta = math.radians(degree)
+        x = 400 + 200 * math.cos(theta)
+        y = 300 + 200 * math.sin(theta)
+        draw_character(x, y)
 
 def move_top():
     print('top')
-    pass
+    for x in range(50, 750, 50):
+        draw_character(x, 550)
+
+def draw_character(x, y):
+    clear_canvas()
+    boy.draw(x, y)
+    update_canvas()
+    delay(0.05)
 
 def move_right():
     print('right')
@@ -37,23 +33,19 @@ def move_left():
     pass
 
 
-def move_square():
+def draw_rectangle():
     move_top()
     move_right()
     move_bottom()
     move_left()
 
-
-
-
-def move_triangle():
+def draw_triangle():
     pass
-
-
 
 open_canvas(800, 600)
 boy = load_image('character.png')
 while True:
-    move_circle()
-    move_square()
-    move_triangle()
+    #draw_circle()
+    draw_rectangle()
+    draw_triangle()
+    break
