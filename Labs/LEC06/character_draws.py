@@ -20,6 +20,9 @@ def draw_character(x, y):
         if event.type == SDL_QUIT:
             close_canvas()
             raise SystemExit
+        if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            close_canvas()
+            raise SystemExit
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
