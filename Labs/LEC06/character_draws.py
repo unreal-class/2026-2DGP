@@ -44,21 +44,21 @@ def draw_rectangle():
     move_left()
 
 def triangle_bottom():
-    for x in range(100, 701, 50):
+    for x in range(100, 701, 10):
         draw_character(x, 100)
 
 
 def triangle_up():
-    for step in range(11):
-        x = 700 - 300 * step / 10
-        y = 100 + 400 * step / 10
+    for step in range(51):
+        x = 700 - 300 * step / 50
+        y = 100 + 400 * step / 50
         draw_character(x, y)
 
 
 def triangle_down():
-    for step in range(11):
-        x = 400 - 300 * step / 10
-        y = 500 - 400 * step / 10
+    for step in range(51):
+        x = 400 - 300 * step / 50
+        y = 500 - 400 * step / 50
         draw_character(x, y)
 
 
