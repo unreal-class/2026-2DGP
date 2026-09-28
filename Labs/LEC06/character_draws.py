@@ -44,7 +44,7 @@ def draw_rectangle():
     move_left()
 
 def draw_triangle():
-    pass
+    draw_character(100, 100)
 
 open_canvas(800, 600)
 boy = load_image('character.png')
