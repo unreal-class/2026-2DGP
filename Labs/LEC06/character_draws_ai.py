@@ -3,6 +3,10 @@ import math
 from pico2d import *
 
 def draw(boy, x, y):
+    for event in get_events():
+        if event.type == SDL_QUIT:
+            close_canvas()
+            raise SystemExit
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
