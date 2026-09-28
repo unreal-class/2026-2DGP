@@ -37,7 +37,8 @@ def circle(boy):
 
 open_canvas(800, 600)
 boy = load_image('character.png')
-circle(boy)
-polygon(boy, [(50, 50), (50, 550), (750, 550), (750, 50)])
-polygon(boy, [(100, 100), (700, 100), (400, 500)])
+while True:
+    circle(boy)
+    polygon(boy, [(50, 50), (50, 550), (750, 550), (750, 50)])
+    polygon(boy, [(100, 100), (700, 100), (400, 500)])
 close_canvas()
