@@ -8,8 +8,17 @@ def draw(boy, x, y):
     delay(0.02)
 
 
+def line(boy, start, end):
+    x1, y1 = start
+    x2, y2 = end
+    count = 20
+    for n in range(count + 1):
+        x = x1 + (x2 - x1) * n / count
+        y = y1 + (y2 - y1) * n / count
+        draw(boy, x, y)
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
-draw(boy, 400, 300)
-delay(0.1)
+line(boy, (50, 50), (50, 550))
 close_canvas()
