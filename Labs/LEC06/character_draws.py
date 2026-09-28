@@ -4,10 +4,6 @@ from pico2d import *
 
 
 def draw(x, y):
-    for event in get_events():
-        if event.type == SDL_QUIT or (event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE):
-            close_canvas()
-            raise SystemExit
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
@@ -24,13 +20,34 @@ def move_circle():
 
 
 
+def move_top():
+    print('top')
+    pass
+
+def move_right():
+    print('right')
+    pass
+
+def move_bottom():
+    print('bottom')
+    pass
+
+def move_left():
+    print('left')
+    pass
+
+
 def move_square():
-    draw(50, 550)
+    move_top()
+    move_right()
+    move_bottom()
+    move_left()
+
 
 
 
 def move_triangle():
-    draw(100, 100)
+    pass
 
 
 
@@ -38,3 +55,5 @@ open_canvas(800, 600)
 boy = load_image('character.png')
 while True:
     move_circle()
+    move_square()
+    move_triangle()
