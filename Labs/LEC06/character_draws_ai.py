@@ -1,5 +1,6 @@
 # AI로 만든 원·사각·삼각 이동 예제
 import math
+from pathlib import Path
 from time import perf_counter
 from pico2d import *
 
@@ -53,7 +54,7 @@ def circle():
 
 
 open_canvas(800, 600)
-boy = load_image('character.png')
+boy = load_image(str(Path(__file__).with_name('character.png')))
 square = [(50, 50), (50, 550), (750, 550), (750, 50)]
 triangle = [(100, 100), (700, 100), (400, 500)]
 paths = (circle(), polygon(square), polygon(triangle))
