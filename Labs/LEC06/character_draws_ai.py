@@ -25,4 +25,5 @@ def line(boy, start, end):
 open_canvas(800, 600)
 boy = load_image('character.png')
 line(boy, (50, 50), (50, 550))
+line(boy, (50, 550), (750, 550))
 close_canvas()
