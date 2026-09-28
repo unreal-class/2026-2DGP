@@ -25,21 +25,16 @@ def move_right():
     print('right')
     for x in range(50, 750, 50):
            draw_character(x, 550)
-    pass
 
 def move_bottom():
     print('bottom')
-    for y in range(450, 50, 50):
+    for y in range(450, 50, -50):
         draw_character(450, y)
 
 def move_left():
     print('left')
     for x in range(750, 50, 50):
-        clear_canvas()
-        boy.draw(x, 100)
-        update_canvas()
-        delay(0.05)
-    pass
+        draw_character(x, 100)
 
 
 def draw_rectangle():
