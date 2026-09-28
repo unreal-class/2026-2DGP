@@ -2,6 +2,9 @@
 import math
 from pico2d import *
 
+FPS = 60
+SPEED = 400  # 초당 이동할 거리
+
 def draw(boy, x, y):
     for event in get_events():
         if event.type == SDL_QUIT or (event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE):
@@ -10,7 +13,7 @@ def draw(boy, x, y):
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
-    delay(0.02)
+    delay(1 / FPS)
 
 
 def line(boy, start, end):
@@ -19,7 +22,8 @@ def line(boy, start, end):
         return
     x1, y1 = start
     x2, y2 = end
-    count = max(1, math.ceil(math.hypot(x2 - x1, y2 - y1) / 10))
+    gap = SPEED / FPS
+    count = max(1, math.ceil(math.hypot(x2 - x1, y2 - y1) / gap))
     for n in range(count + 1):
         x = x1 + (x2 - x1) * n / count
         y = y1 + (y2 - y1) * n / count
@@ -32,8 +36,9 @@ def polygon(boy, points):
 
 
 def circle(boy):
-    for degree in range(0, 361, 5):
-        angle = math.radians(degree)
+    count = math.ceil(2 * math.pi * 200 / (SPEED / FPS))
+    for n in range(count + 1):
+        angle = 2 * math.pi * n / count
         x = 400 + 200 * math.cos(angle)
         y = 300 + 200 * math.sin(angle)
         draw(boy, x, y)
