@@ -5,6 +5,7 @@ def draw(boy, x, y):
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
+    delay(0.02)
 
 
 open_canvas(800, 600)
