@@ -5,6 +5,7 @@
             "name": "Python: Current File",
             "type": "debugpy",
             "request": "launch",
+            "python": "C:\\Users\\ryz\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
             "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${fileDirname}"
