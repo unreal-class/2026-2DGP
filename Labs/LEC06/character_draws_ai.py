@@ -30,7 +30,5 @@ def polygon(boy, points):
 open_canvas(800, 600)
 boy = load_image('character.png')
 polygon(boy, [(50, 50), (50, 550), (750, 550), (750, 50)])
-line(boy, (100, 100), (700, 100))
-line(boy, (700, 100), (400, 500))
-line(boy, (400, 500), (100, 100))
+polygon(boy, [(100, 100), (700, 100), (400, 500)])
 close_canvas()
