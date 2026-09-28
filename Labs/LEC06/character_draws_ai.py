@@ -22,10 +22,12 @@ def line(boy, start, end):
         draw(boy, x, y)
 
 
+def polygon(boy, points):
+    for start, end in zip(points, points[1:] + points[:1]):
+        line(boy, start, end)
+
+
 open_canvas(800, 600)
 boy = load_image('character.png')
-line(boy, (50, 50), (50, 550))
-line(boy, (50, 550), (750, 550))
-line(boy, (750, 550), (750, 50))
-line(boy, (750, 50), (50, 50))
+polygon(boy, [(50, 50), (50, 550), (750, 550), (750, 50)])
 close_canvas()
