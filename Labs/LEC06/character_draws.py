@@ -70,7 +70,7 @@ def draw_triangle():
 open_canvas(800, 600)
 boy = load_image('character.png')
 while True:
-    #draw_circle()
+    draw_circle()
     draw_rectangle()
     draw_triangle()
     break
