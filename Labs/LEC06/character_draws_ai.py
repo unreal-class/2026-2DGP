@@ -54,8 +54,8 @@ open_canvas(800, 600)
 boy = load_image('character.png')
 square = [(50, 50), (50, 550), (750, 550), (750, 50)]
 triangle = [(100, 100), (700, 100), (400, 500)]
+paths = (circle(), polygon(square), polygon(triangle))
 while True:
-    paths = (circle(), polygon(square), polygon(triangle))
     for points in paths:
         for x, y in points:
             draw(boy, x, y)
