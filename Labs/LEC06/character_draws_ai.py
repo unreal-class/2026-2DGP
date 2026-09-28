@@ -1,11 +1,13 @@
 # AI로 만든 원·사각·삼각 이동 예제
 import math
+from time import perf_counter
 from pico2d import *
 
 FPS = 60
 SPEED = 400  # 초당 이동할 거리
 
 def draw(boy, x, y):
+    start_time = perf_counter()
     for event in get_events():
         if event.type == SDL_QUIT or (event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE):
             close_canvas()
@@ -13,7 +15,7 @@ def draw(boy, x, y):
     clear_canvas()
     boy.draw(x, y)
     update_canvas()
-    delay(1 / FPS)
+    delay(max(0, 1 / FPS - (perf_counter() - start_time)))
 
 
 def line(start, end):
