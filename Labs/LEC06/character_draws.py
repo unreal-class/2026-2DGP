@@ -73,4 +73,3 @@ while True:
     draw_circle()
     draw_rectangle()
     draw_triangle()
-    break
