@@ -29,10 +29,16 @@ def move_right():
 
 def move_bottom():
     print('bottom')
-    pass
+    for y in range(450, 50, 50):
+        draw_character(450, y)
 
 def move_left():
     print('left')
+    for x in range(750, 50, 50):
+        clear_canvas()
+        boy.draw(x, 100)
+        update_canvas()
+        delay(0.05)
     pass
 
 
