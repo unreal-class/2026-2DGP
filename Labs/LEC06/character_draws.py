@@ -43,17 +43,29 @@ def draw_rectangle():
     move_bottom()
     move_left()
 
-def draw_triangle():
+def triangle_bottom():
     for x in range(100, 701, 50):
         draw_character(x, 100)
+
+
+def triangle_up():
     for step in range(11):
         x = 700 - 300 * step / 10
         y = 100 + 400 * step / 10
         draw_character(x, y)
+
+
+def triangle_down():
     for step in range(11):
         x = 400 - 300 * step / 10
         y = 500 - 400 * step / 10
         draw_character(x, y)
+
+
+def draw_triangle():
+    triangle_bottom()
+    triangle_up()
+    triangle_down()
 
 open_canvas(800, 600)
 boy = load_image('character.png')
