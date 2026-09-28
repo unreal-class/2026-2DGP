@@ -50,6 +50,10 @@ def draw_triangle():
         x = 700 - 300 * step / 10
         y = 100 + 400 * step / 10
         draw_character(x, y)
+    for step in range(11):
+        x = 400 - 300 * step / 10
+        y = 500 - 400 * step / 10
+        draw_character(x, y)
 
 open_canvas(800, 600)
 boy = load_image('character.png')
