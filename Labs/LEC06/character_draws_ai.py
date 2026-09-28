@@ -1,4 +1,5 @@
 # AI로 만든 원·사각·삼각 이동 예제
+import math
 from pico2d import *
 
 def draw(boy, x, y):
@@ -11,7 +12,7 @@ def draw(boy, x, y):
 def line(boy, start, end):
     x1, y1 = start
     x2, y2 = end
-    count = 20
+    count = max(1, math.ceil(math.hypot(x2 - x1, y2 - y1) / 10))
     for n in range(count + 1):
         x = x1 + (x2 - x1) * n / count
         y = y1 + (y2 - y1) * n / count
