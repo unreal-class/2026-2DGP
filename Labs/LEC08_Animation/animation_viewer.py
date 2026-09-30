@@ -5,7 +5,7 @@ from pico2d import *
 WIDTH, HEIGHT = 800, 600
 SCALE = 1
 FRAME_TIME = 0.09
-ANIMATIONS = [["idle","대기"]]
+ANIMATIONS = [["idle","대기"],["run","달리기"]]
 
 def draw_frame(sheet, frame):
     box = frame['frame']
