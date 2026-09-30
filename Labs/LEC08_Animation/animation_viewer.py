@@ -4,5 +4,6 @@ from pico2d import *
 WIDTH, HEIGHT = 800, 600
 
 open_canvas(WIDTH, HEIGHT)
+sheet = load_image('viewer_knight.png')
 delay(0.2)
 close_canvas()
