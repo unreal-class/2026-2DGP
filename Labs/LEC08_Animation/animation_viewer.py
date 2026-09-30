@@ -26,12 +26,13 @@ with open('viewer_knight.json', encoding='utf-8') as file:
     data = json.load(file)
 all_frames = data['textures'][0]['frames']
 all_frames = sorted(all_frames, key=lambda frame: frame['filename'])
-for key, name in ANIMATIONS:
-    frames = [frame for frame in all_frames
-              if frame['filename'].startswith(key + '/')]
-    for repeat in range(REPEATS):
-        for frame in frames:
-            draw_frame(sheet, frame)
-            delay(FRAME_TIME)
-    delay(PAUSE_TIME)
+while True:
+    for key, name in ANIMATIONS:
+        frames = [frame for frame in all_frames
+                  if frame['filename'].startswith(key + '/')]
+        for repeat in range(REPEATS):
+            for frame in frames:
+                draw_frame(sheet, frame)
+                delay(FRAME_TIME)
+        delay(PAUSE_TIME)
 close_canvas()
