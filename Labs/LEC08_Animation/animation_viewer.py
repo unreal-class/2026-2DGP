@@ -13,6 +13,11 @@ def draw_frame(sheet, frame):
     box = frame['frame']
     w, h = box['w'], box['h']
     x, y = WIDTH / 2, HEIGHT / 2
+    # 잘려 나간 투명 여백의 위치를 복원해 중심이 흔들리지 않게 한다.
+    trim = frame['spriteSourceSize']
+    source = frame['sourceSize']
+    x += (trim['x'] + w / 2 - source['w'] / 2) * SCALE
+    y += (source['h'] / 2 - trim['y'] - h / 2) * SCALE
     clear_canvas()
     # JSON은 위에서부터, pico2d는 아래에서부터 y 좌표를 센다.
     sheet.clip_draw(box['x'], sheet.h - box['y'] - h, w, h,
