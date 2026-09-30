@@ -14,7 +14,7 @@ def wait(seconds):
     end = perf_counter() + seconds
     while perf_counter() < end:
         for event in get_events():
-            if event.type == SDL_QUIT:
+            if event.type == SDL_QUIT or (event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE):
                 close_canvas()
                 raise SystemExit
         delay(min(0.01, max(0, end - perf_counter())))
