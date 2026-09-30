@@ -20,7 +20,7 @@ def wait(seconds):
         delay(min(0.01, max(0, end - perf_counter())))
 
 
-def draw_frame(sheet, frame):
+def draw_frame(sheet, frame, font, text):
     box = frame['frame']
     w, h = box['w'], box['h']
     x, y = WIDTH / 2, HEIGHT / 2
@@ -33,6 +33,9 @@ def draw_frame(sheet, frame):
     # JSON은 위에서부터, pico2d는 아래에서부터 y 좌표를 센다.
     sheet.clip_draw(box['x'], sheet.h - box['y'] - h, w, h,
                     x, y, w * SCALE, h * SCALE)
+    font.draw(24, HEIGHT - 28, 'ANIMATION VIEWER', (35, 35, 45))
+    font.draw(24, 24, text, (35, 35, 45))
+    font.draw(WIDTH - 112, 24, 'ESC 종료', (70, 70, 80))
     update_canvas()
 
 
@@ -42,13 +45,17 @@ with open('viewer_knight.json', encoding='utf-8') as file:
     data = json.load(file)
 all_frames = data['textures'][0]['frames']
 all_frames = sorted(all_frames, key=lambda frame: frame['filename'])
+font = load_font('C:/Windows/Fonts/malgun.ttf', 20)
 while True:
     for key, name in ANIMATIONS:
         frames = [frame for frame in all_frames
                   if frame['filename'].startswith(key + '/')]
         for repeat in range(REPEATS):
             for frame in frames:
-                draw_frame(sheet, frame)
+                text = f'{name} | {len(frames)}프레임 | {repeat + 1}/{REPEATS}회'
+                draw_frame(sheet, frame, font, text)
                 wait(FRAME_TIME)
+        draw_frame(sheet, frames[-1], font,
+                   f'{name} | {REPEATS}/{REPEATS}회 완료 - 1초 정지')
         wait(PAUSE_TIME)
 close_canvas()
