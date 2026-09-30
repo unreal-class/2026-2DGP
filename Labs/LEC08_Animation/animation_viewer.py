@@ -1,5 +1,6 @@
 # Drill 08: AI를 이용한 애니메이션 뷰어
 import json
+from time import perf_counter
 from pico2d import *
 
 WIDTH, HEIGHT = 800, 600
@@ -8,6 +9,16 @@ FRAME_TIME = 0.09
 REPEATS = 5
 PAUSE_TIME = 1.0
 ANIMATIONS = [["idle","대기"],["run","달리기"],["attack_A","공격"],["die","쓰러짐"]]
+
+def wait(seconds):
+    end = perf_counter() + seconds
+    while perf_counter() < end:
+        for event in get_events():
+            if event.type == SDL_QUIT:
+                close_canvas()
+                raise SystemExit
+        delay(min(0.01, max(0, end - perf_counter())))
+
 
 def draw_frame(sheet, frame):
     box = frame['frame']
@@ -38,6 +49,6 @@ while True:
         for repeat in range(REPEATS):
             for frame in frames:
                 draw_frame(sheet, frame)
-                delay(FRAME_TIME)
-        delay(PAUSE_TIME)
+                wait(FRAME_TIME)
+        wait(PAUSE_TIME)
 close_canvas()
