@@ -6,6 +6,7 @@ WIDTH, HEIGHT = 800, 600
 SCALE = 1
 FRAME_TIME = 0.09
 REPEATS = 5
+PAUSE_TIME = 1.0
 ANIMATIONS = [["idle","대기"],["run","달리기"],["attack_A","공격"],["die","쓰러짐"]]
 
 def draw_frame(sheet, frame):
@@ -32,4 +33,5 @@ for key, name in ANIMATIONS:
         for frame in frames:
             draw_frame(sheet, frame)
             delay(FRAME_TIME)
+    delay(PAUSE_TIME)
 close_canvas()
