@@ -3,7 +3,7 @@ import json
 from pico2d import *
 
 WIDTH, HEIGHT = 800, 600
-SCALE = 1
+SCALE = 8
 FRAME_TIME = 0.09
 REPEATS = 5
 PAUSE_TIME = 1.0
