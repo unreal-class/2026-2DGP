@@ -5,6 +5,7 @@ from pico2d import *
 WIDTH, HEIGHT = 800, 600
 SCALE = 1
 FRAME_TIME = 0.09
+REPEATS = 5
 ANIMATIONS = [["idle","대기"],["run","달리기"],["attack_A","공격"],["die","쓰러짐"]]
 
 def draw_frame(sheet, frame):
@@ -27,7 +28,8 @@ all_frames = sorted(all_frames, key=lambda frame: frame['filename'])
 for key, name in ANIMATIONS:
     frames = [frame for frame in all_frames
               if frame['filename'].startswith(key + '/')]
-    for frame in frames:
-        draw_frame(sheet, frame)
-        delay(FRAME_TIME)
+    for repeat in range(REPEATS):
+        for frame in frames:
+            draw_frame(sheet, frame)
+            delay(FRAME_TIME)
 close_canvas()
