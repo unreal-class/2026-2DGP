@@ -1,5 +1,6 @@
 # Drill 08: AI를 이용한 애니메이션 뷰어
 import json
+from pathlib import Path
 from time import perf_counter
 from pico2d import *
 
@@ -8,6 +9,7 @@ SCALE = 8
 FRAME_TIME = 0.09
 REPEATS = 5
 PAUSE_TIME = 1.0
+FOLDER = Path(__file__).resolve().parent
 ANIMATIONS = [["idle","대기"],["run","달리기"],["attack_A","공격"],["die","쓰러짐"]]
 
 def wait(seconds):
@@ -40,9 +42,8 @@ def draw_frame(sheet, frame, font, text):
 
 
 open_canvas(WIDTH, HEIGHT)
-sheet = load_image('viewer_knight.png')
-with open('viewer_knight.json', encoding='utf-8') as file:
-    data = json.load(file)
+sheet = load_image(str(FOLDER / 'viewer_knight.png'))
+data = json.loads((FOLDER / 'viewer_knight.json').read_text(encoding='utf-8'))
 all_frames = data['textures'][0]['frames']
 all_frames = sorted(all_frames, key=lambda frame: frame['filename'])
 font = load_font('C:/Windows/Fonts/malgun.ttf', 20)
