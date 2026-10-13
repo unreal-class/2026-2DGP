@@ -5,6 +5,18 @@ from pathlib import Path
 
 ASSET_DIR = Path(__file__).resolve().parent
 WIDTH, HEIGHT = 800, 600
+BALL_COUNT = 20
+
+
+class Ball:
+    def __init__(self, size):
+        self.image = load_image(str(ASSET_DIR / f'ball{size}x{size}.png'))
+        self.radius = size / 2
+        self.x = random.randint(size // 2 + 1, WIDTH - size // 2 - 1)
+        self.y = 599
+
+    def draw(self):
+        self.image.draw(self.x, self.y)
 
 
 class Grass:
@@ -19,9 +31,12 @@ class Grass:
 
 
 def reset_world():
-    global running, grass
+    global running, grass, balls
     running = True
     grass = Grass()
+    sizes = [21, 41] * (BALL_COUNT // 2)
+    random.shuffle(sizes)
+    balls = [Ball(size) for size in sizes]
 
 
 def update_world():
@@ -31,6 +46,8 @@ def update_world():
 def render_world():
     clear_canvas()
     grass.draw()
+    for ball in balls:
+        ball.draw()
     update_canvas()
 
 
