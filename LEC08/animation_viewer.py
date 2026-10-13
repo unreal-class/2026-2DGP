@@ -1,50 +1,60 @@
-"""Drill 8: python LEC08/animation_viewer.py (Escape to exit)."""
-import argparse
-from time import perf_counter
+from pico2d import *
+import os
 
-from layout import HEIGHT, WIDTH, stage_layout
-from loading import ASSETS, load_animations
-from playback import state_at
+# VS Code에서 어느 폴더를 열어도 이미지 파일을 찾을 수 있도록 합니다.
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+open_canvas()
+
+grass = load_image('grass.png')
+character = load_image('animation_sheet.png')
+
+running = True
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="Validate metadata without a window")
-    parser.add_argument("--seconds", type=float, default=None,
-                        help="Exit after this many seconds (for smoke testing)")
-    args = parser.parse_args()
-    if args.seconds is not None and args.seconds <= 0:
-        parser.error("--seconds must be positive")
-    data, animations = load_animations()
-    layout = stage_layout(animations, data["stage"])
-    if args.check:
-        print("Validated:", ", ".join(f"{a.name} ({len(a.frames)} frames)" for a in animations))
-        return
-    import pico2d as p
-    from rendering import load_ui_font, render
-    p.open_canvas(WIDTH, HEIGHT, sync=True)
-    try:
-        sheet = p.load_image(str(ASSETS / data["image"]))
-        for animation in animations:
-            for frame in animation.frames:
-                if frame.x + frame.width > sheet.w or frame.y + frame.height > sheet.h:
-                    raise ValueError("A frame extends beyond the sprite sheet")
-        font = load_ui_font()
-        start = perf_counter()
-        while True:
-            events = p.get_events()
-            if any(event.type == p.SDL_QUIT or
-                   (event.type == p.SDL_KEYDOWN and event.key == p.SDLK_ESCAPE)
-                   for event in events):
+def handle_events():
+    global running
+    for event in get_events():
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
+
+while running:
+    for action in (3, 2, 1, 0):
+        frame = 0
+        for repeat in range(5):
+            for count in range(8):
+                handle_events()
+                if not running:
+                    break
+
+                clear_canvas()
+                grass.draw(400, 30)
+                character.clip_draw(
+                    frame * 100, action * 100,
+                    100, 100, 400, 300, 500, 500
+                )
+                update_canvas()
+
+                frame = (frame + 1) % 8
+                delay(0.05)
+
+            if not running:
                 break
-            elapsed = perf_counter() - start
-            if args.seconds is not None and elapsed >= args.seconds:
+
+        if not running:
+            break
+
+        # 마지막 프레임에서 총 1초 정지합니다.
+        # 정지 중에도 창 닫기와 ESC를 처리합니다.
+        for count in range(20):
+            handle_events()
+            if not running:
                 break
-            render(sheet, font, animations, state_at(animations, elapsed), layout)
-            p.delay(0.001)
-    finally:
-        p.close_canvas()
+            delay(0.05)
 
+        if not running:
+            break
 
-if __name__ == "__main__":
-    main()
+close_canvas()
