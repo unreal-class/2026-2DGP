@@ -1,5 +1,6 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
+chcp 65001 >nul
 
 cd /d "%~dp0"
 
@@ -43,6 +44,26 @@ goto check_push
 
 :commit_changes
 echo Changes found.
+echo.
+echo Files to commit:
+git status --short >nul
+if errorlevel 1 (
+  echo Failed to list files to commit.
+  pause
+  exit /b 1
+)
+for /f "tokens=1,*" %%A in ('git -c "core.quotePath=false" status --short') do (
+  set "CHANGE_TYPE=[Changed]"
+  if "%%A"=="??" set "CHANGE_TYPE=[New File]"
+  if "%%A"=="A"  set "CHANGE_TYPE=[New File]"
+  if "%%A"=="M"  set "CHANGE_TYPE=[Modified]"
+  if "%%A"=="D"  set "CHANGE_TYPE=[Deleted]"
+  if "%%A"=="R"  set "CHANGE_TYPE=[Renamed]"
+  if "%%A"=="C"  set "CHANGE_TYPE=[Copied]"
+  if "%%A"=="U"  set "CHANGE_TYPE=[Conflict]"
+  echo   !CHANGE_TYPE! %%B
+)
+echo.
 set /p "COMMIT_MESSAGE=Commit message: "
 if not defined COMMIT_MESSAGE (
   echo Commit message is required.
