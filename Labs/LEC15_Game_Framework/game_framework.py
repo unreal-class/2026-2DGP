@@ -1,3 +1,4 @@
+import time
 running = False
 stack = []
 
@@ -40,6 +41,7 @@ def run(start_mode):
             stack[-1].handle_events()
             stack[-1].update()
             stack[-1].render()
+            time.sleep(0.02)
     finally:
         while stack:
             stack.pop().finish()
