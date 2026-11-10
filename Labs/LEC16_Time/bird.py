@@ -21,5 +21,15 @@ class Bird:
         self.image = load_image('bird_animation.png')
 
     def update(self):
-        """Advance on the x axis using frame-time based motion."""
+        """Advance on the x axis and reverse at the visible canvas edges."""
         self.x += self.direction * self.speed * game_framework.frame_time
+
+        half_width = self.FRAME_WIDTH // 2
+        left_edge = half_width
+        right_edge = get_canvas_width() - half_width
+        if self.x <= left_edge:
+            self.x = left_edge
+            self.direction = 1
+        elif self.x >= right_edge:
+            self.x = right_edge
+            self.direction = -1
