@@ -9,6 +9,7 @@ class Bird:
     FRAME_WIDTH = 153
     FRAME_HEIGHT = 169
     FRAME_COUNT = 6
+    FLAP_FRAMES_PER_SECOND = 10
 
     def __init__(self, x, y, speed, direction=1):
         self.x = x
@@ -23,6 +24,8 @@ class Bird:
     def update(self):
         """Advance on the x axis and reverse at the visible canvas edges."""
         self.x += self.direction * self.speed * game_framework.frame_time
+        self.frame = (self.frame + self.FLAP_FRAMES_PER_SECOND *
+                      game_framework.frame_time) % self.FRAME_COUNT
 
         half_width = self.FRAME_WIDTH // 2
         left_edge = half_width
