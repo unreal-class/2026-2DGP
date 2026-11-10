@@ -1,4 +1,6 @@
-from pico2d import load_image
+from pico2d import get_canvas_width, load_image
+
+import game_framework
 
 
 class Bird:
@@ -17,3 +19,7 @@ class Bird:
         self.direction = direction
         self.frame = 0.0
         self.image = load_image('bird_animation.png')
+
+    def update(self):
+        """Advance on the x axis using frame-time based motion."""
+        self.x += self.direction * self.speed * game_framework.frame_time
