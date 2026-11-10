@@ -1,17 +1,16 @@
 from pico2d import *
 
+def move_circle():
+    pass
+def move_triangle():
+    pass
+def move_rectangle():
+    pass
 
 open_canvas(800, 600)
 
-# 여기를 채우시오.
-
-
-
-
-
-
-
-delay(2)
-
-close_canvas()
-
+while True :
+    move_circle()
+    move_triangle()
+    move_rectangle()
+    pass

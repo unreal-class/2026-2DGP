@@ -1,0 +1,18 @@
+from pico2d import *
+import math
+
+open_canvas(800,600)
+character = load_image('character.png')
+
+cx, cy = 400, 300  
+r = 200  
+
+while 1 :
+    for i in range(0, 360):
+        rad = math.radians(i)
+        x = cx + r * math.cos(rad)
+        y = cy + r * math.sin(rad)
+        clear_canvas()
+        character.draw(x, y)
+        update_canvas()
+        delay(0.01)
