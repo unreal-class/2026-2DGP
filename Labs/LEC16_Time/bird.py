@@ -36,3 +36,12 @@ class Bird:
         elif self.x >= right_edge:
             self.x = right_edge
             self.direction = -1
+
+    def draw(self):
+        """Draw the current wing pose, mirroring it for leftward flight."""
+        frame_x = int(self.frame) * self.FRAME_WIDTH
+        flip = '' if self.direction == 1 else 'h'
+        self.image.clip_composite_draw(
+            frame_x, 337, self.FRAME_WIDTH, self.FRAME_HEIGHT,
+            0, flip, self.x, self.y, 122, 135
+        )
