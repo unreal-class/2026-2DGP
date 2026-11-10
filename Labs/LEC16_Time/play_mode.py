@@ -35,7 +35,9 @@ def init():
         (1440, 500, 115, 1), (250, 290, 175, -1),
         (690, 240, 130, 1), (1160, 270, 150, -1),
     ]
-    birds = [Bird(*spec) for spec in flight_specs]
+    # A different phase prevents ten identical wing poses at startup.
+    birds = [Bird(*spec, start_frame=index * 1.6)
+             for index, spec in enumerate(flight_specs)]
     for bird in birds:
         game_world.add_oject(bird)
 
