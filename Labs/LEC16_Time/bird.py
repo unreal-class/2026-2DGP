@@ -11,6 +11,8 @@ class Bird:
     def __init__(self, x, y, speed, direction=1):
         self.x = x
         self.y = y
+        # Each instance owns its flight lane, pace, and heading.  This keeps
+        # the ten birds from moving as one synchronized group.
         self.speed = speed
         self.direction = direction
         self.frame = 0.0
