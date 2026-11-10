@@ -6,15 +6,23 @@ import game_framework
 class Bird:
     """A single animated bird from the shared flight sprite sheet."""
 
-    FRAME_WIDTH = 153
-    FRAME_HEIGHT = 169
-    FRAME_COUNT = 16
-    FRAMES_PER_ROW = 6
-    # pico2d measures source coordinates from the bottom.  The last source
-    # row is one pixel shorter, so its origin is explicitly kept at zero.
-    FRAME_ROW_BOTTOMS = (337, 168, 0)
+    # Source is 918 x 506: five poses in each of the first two rows,
+    # four in the last. Beaks repeat every 182 pixels, not 153 pixels.
+    # Explicit (left, bottom, width, height) rectangles in pico2d coordinates.
+    FRAME_RECTS = (
+        (0, 337, 182, 169), (182, 337, 182, 169),
+        (364, 337, 182, 169), (546, 337, 182, 169),
+        (728, 337, 182, 169),
+        (0, 168, 182, 169), (182, 168, 182, 169),
+        (364, 168, 182, 169), (546, 168, 182, 169),
+        (728, 168, 182, 169),
+        # Exclude the preceding row's wing tip above the final row.
+        (0, 0, 182, 160), (182, 0, 182, 160),
+        (364, 0, 182, 160), (546, 0, 182, 160),
+    )
+    FRAME_COUNT = len(FRAME_RECTS)
     DRAW_WIDTH = 122
-    DRAW_HEIGHT = 135
+    DRAW_HEIGHT = 113
     FLAP_FRAMES_PER_SECOND = 10
 
     def __init__(self, x, y, speed, direction=1, start_frame=0.0):
@@ -45,11 +53,11 @@ class Bird:
 
     def draw(self):
         """Draw the current wing pose, mirroring it for leftward flight."""
-        frame_index = int(self.frame)
-        frame_x = (frame_index % self.FRAMES_PER_ROW) * self.FRAME_WIDTH
-        frame_y = self.FRAME_ROW_BOTTOMS[frame_index // self.FRAMES_PER_ROW]
+        rect = self.FRAME_RECTS[int(self.frame)]
+        height = self.DRAW_HEIGHT * rect[3] / 169
+        center_y = self.y - (self.DRAW_HEIGHT - height) / 2
         flip = '' if self.direction == 1 else 'h'
         self.image.clip_composite_draw(
-            frame_x, frame_y, self.FRAME_WIDTH, self.FRAME_HEIGHT,
-            0, flip, self.x, self.y, self.DRAW_WIDTH, self.DRAW_HEIGHT
+            *rect,
+            0, flip, self.x, center_y, self.DRAW_WIDTH, height
         )
